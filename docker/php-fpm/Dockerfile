@@ -55,8 +55,9 @@ RUN apt-get update \
     && docker-php-ext-enable xdebug redis
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin/ --filename=composer
+RUN composer config -g repos.packagist composer https://packagist.kr
 
-RUN composer global require laravel/installer
+RUN composer global require laravel/installer --prefer-dist
 RUN ["/bin/bash", "-c", "echo PATH=$PATH:~/.composer/vendor/bin/ >> ~/.bashrc"]
 RUN ["/bin/bash", "-c", "source ~/.bashrc"]
 
