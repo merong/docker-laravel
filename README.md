@@ -27,10 +27,15 @@ project_root
 - 터미널에서 다음을 실행하여 php-fpm 소스를 재 컴파일
 ```bash
 shell> docker-compose build --force-rm --no-cache 
-
 ```
-
-
+- docker 실행
+```bash
+shell> docker-compose up -d
+```
+- php composer install
+```bash
+shell> docker exec xdictionary_api_fpm_1 sh -c "composer install --prefer-dist"
+```
 
 #### nginx 서버 호스트 설정 
 ```
@@ -69,6 +74,24 @@ server {
         deny all;
     }
 }
+```
+
+
+#### larabel artisan 명령어
+```
+shell> docker exec xdictionary_api_fpm_1 sh -c "php artisan route:list"  
+
+shell> docker exec xdictionary_api_fpm_1 sh -c "php artisan route:clear"  
+
+shell> docker exec xdictionary_api_fpm_1 sh -c "php artisan cache:clear"  
+
+shell> docker exec xdictionary_api_fpm_1 sh -c "php artisan optimize"
+
+```
+
+#### larabel routing cache 재생성
+```
+shell> docker exec xdictionary_api_fpm_1 sh -c "composer dump-autoload"  
 ```
 
 #### Xdebug 설정 및 사용
