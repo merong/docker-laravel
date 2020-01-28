@@ -6,18 +6,26 @@
 ```dir
 project_root
 ├── docker/
-│   └── mysql/
-│   └── nginx/
-│   │   └── ca/
-│   │   └── conf.d/
+│   ├── mysql/
+│   ├── nginx/
+│   │   ├── ca/
+│   │   ├── conf.d/
 │   │   │   └── default.conf
 │   │   └── nginx.conf
 │   └── php-fpm/
-│       └── Dockerfile 
-│       └── php.ini 
+│       ├── Dockerfile 
+│       ├── php.ini 
 │       └── php.ini-production 
-└── dir2/
-    └── file2/
+├── app/
+│    └── file2/
+├── public/
+├── dir1/
+├── dir2/
+├── composer.json
+└── docker-compose.yml
+
+
+    
 
 ```
 
@@ -34,7 +42,7 @@ shell> docker-compose up -d
 ```
 - php composer install
 ```bash
-shell> docker exec xdictionary_api_fpm_1 sh -c "composer install --prefer-dist"
+shell> docker exec {image_name} sh -c "composer install --prefer-dist"
 ```
 
 #### nginx 서버 호스트 설정 
@@ -79,19 +87,19 @@ server {
 
 #### larabel artisan 명령어
 ```
-shell> docker exec xdictionary_api_fpm_1 sh -c "php artisan route:list"  
+shell> docker exec {image_name} sh -c "php artisan route:list"  
 
-shell> docker exec xdictionary_api_fpm_1 sh -c "php artisan route:clear"  
+shell> docker exec {image_name} sh -c "php artisan route:clear"  
 
-shell> docker exec xdictionary_api_fpm_1 sh -c "php artisan cache:clear"  
+shell> docker exec {image_name} sh -c "php artisan cache:clear"  
 
-shell> docker exec xdictionary_api_fpm_1 sh -c "php artisan optimize"
+shell> docker exec {image_name} sh -c "php artisan optimize"
 
 ```
 
 #### larabel routing cache 재생성
 ```
-shell> docker exec xdictionary_api_fpm_1 sh -c "composer dump-autoload"  
+shell> docker exec {image_name} sh -c "composer dump-autoload"  
 ```
 
 #### Xdebug 설정 및 사용
@@ -99,7 +107,7 @@ shell> docker exec xdictionary_api_fpm_1 sh -c "composer dump-autoload"
 
 ----
 
-#### docker 명령어 
+#### docker 명령어 참조 
 
 
 ```
